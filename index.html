@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stickyweb - Превратите хаос задач в целостную систему</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing-page" class="page active">
+        <div class="hero">
+            <div class="hero-emoji">🕸️</div>
+            <h1 class="hero-title">Stickyweb</h1>
+            <p class="hero-tagline">Превратите хаос задач в целостную систему</p>
+            <div class="hero-cta">
+                <button class="btn btn--primary btn--lg" id="create-web-btn">Создать паутину</button>
+                <button class="btn btn--outline btn--lg" id="view-examples-btn">Посмотреть примеры</button>
+            </div>
+        </div>
+        
+        <div class="explanation">
+            <h2>Как это работает</h2>
+            <div class="explanation-grid">
+                <div class="explanation-item">
+                    <div class="explanation-icon">⚪</div>
+                    <h3>Центр</h3>
+                    <p>Главный проект или цель</p>
+                </div>
+                <div class="explanation-item">
+                    <div class="explanation-icon">📍</div>
+                    <h3>Лучи</h3>
+                    <p>Ключевые направления работы</p>
+                </div>
+                <div class="explanation-item">
+                    <div class="explanation-icon">🔗</div>
+                    <h3>Нити</h3>
+                    <p>Конкретные задачи и действия</p>
+                </div>
+                <div class="explanation-item">
+                    <div class="explanation-icon">📊</div>
+                    <h3>Плотность</h3>
+                    <p>Общая мера прогресса</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Onboarding Page -->
+    <div id="onboarding-page" class="page">
+        <div class="onboarding-container">
+            <div class="onboarding-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="progress-text"><span id="current-step">1</span> / 5</div>
+            </div>
+            
+            <div class="onboarding-content">
+                <h2 id="onboarding-title">Давайте создадим центр вашей паутины</h2>
+                <p id="onboarding-description">Это центр - ваш главный проект, цель или область жизни</p>
+                
+                <div id="onboarding-step-content">
+                    <!-- Dynamic content based on step -->
+                </div>
+                
+                <div class="onboarding-actions">
+                    <button class="btn btn--outline" id="skip-onboarding">Пропустить</button>
+                    <button class="btn btn--primary" id="next-step-btn">Далее</button>
+                </div>
+            </div>
+            
+            <div class="onboarding-preview">
+                <svg id="onboarding-svg" width="400" height="400" viewBox="0 0 400 400"></svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template Gallery Page -->
+    <div id="template-page" class="page">
+        <div class="template-container">
+            <div class="template-header">
+                <h1>Выберите шаблон</h1>
+                <p>Начните с готового шаблона или создайте свой</p>
+            </div>
+            
+            <div class="template-grid" id="template-grid">
+                <!-- Templates will be dynamically added -->
+            </div>
+            
+            <div class="template-actions">
+                <button class="btn btn--outline" id="back-to-landing">Назад</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Canvas Page -->
+    <div id="canvas-page" class="page">
+        <div class="toolbar">
+            <div class="toolbar-left">
+                <button class="btn btn--outline btn--sm" id="home-btn" title="На главную">🏠</button>
+                <div class="project-name-edit">
+                    <input type="text" id="project-name" class="form-control" placeholder="Название проекта">
+                </div>
+            </div>
+            
+            <div class="toolbar-right">
+                <button class="btn btn--outline btn--sm" id="add-ray-btn" title="Добавить луч">+ Луч</button>
+                <button class="btn btn--outline btn--sm" id="add-thread-btn" title="Добавить нить">+ Нить</button>
+                <button class="btn btn--outline btn--sm" id="undo-btn" title="Отменить" disabled>↶</button>
+                <button class="btn btn--outline btn--sm" id="redo-btn" title="Повторить" disabled>↷</button>
+                <div class="zoom-controls">
+                    <span class="zoom-display" id="zoom-display">🔍 100%</span>
+                    <button class="btn btn--outline btn--sm" id="zoom-reset-btn" title="Сбросить масштаб (Ctrl+0)">100%</button>
+                    <button class="btn btn--outline btn--sm" id="fit-screen-btn" title="Вместить все">⊡</button>
+                </div>
+                <button class="btn btn--outline btn--sm" id="export-btn" title="Экспорт">💾</button>
+                <button class="btn btn--outline btn--sm" id="help-btn" title="Помощь">❓</button>
+                <button class="btn btn--outline btn--sm" id="settings-btn" title="Настройки">⚙️</button>
+            </div>
+        </div>
+        
+        <div class="canvas-main">
+            <div class="canvas-area">
+                <svg id="web-canvas" width="100%" height="100%">
+                    <g id="web-group"></g>
+                </svg>
+                <div class="empty-state" id="empty-state">
+                    <p>Нажмите '+ Луч' чтобы добавить направление</p>
+                </div>
+                <div class="pan-hint" id="pan-hint">💡 Зажмите и перетаскивайте для навигации • Колесико мыши для зума</div>
+                <div class="autosave-indicator" id="autosave-indicator">Автосохранено</div>
+            </div>
+            
+            <div class="sidebar" id="sidebar">
+                <button class="sidebar-toggle" id="sidebar-toggle">◀</button>
+                
+                <div class="sidebar-content">
+                    <div class="sidebar-section">
+                        <h3>Легенда</h3>
+                        <div class="legend-item">
+                            <span class="legend-symbol legend-center">●</span>
+                            <span>Центр</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-symbol legend-ray">─</span>
+                            <span>Луч</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-symbol legend-thread">•</span>
+                            <span>Нить</span>
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-section">
+                        <h3>Статистика</h3>
+                        <div class="stat-item">
+                            <span class="stat-label">Лучи:</span>
+                            <span class="stat-value" id="stat-rays">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Нити:</span>
+                            <span class="stat-value" id="stat-threads">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Плотность:</span>
+                            <span class="stat-value" id="stat-density">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Thread Modal -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Редактировать нить</h3>
+                <button class="modal-close" id="modal-close">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Название</label>
+                    <input type="text" id="modal-name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Заметки</label>
+                    <textarea id="modal-notes" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Луч</label>
+                    <select id="modal-ray" class="form-control">
+                        <!-- Options will be dynamically added -->
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn--outline" id="modal-delete">Удалить</button>
+                <button class="btn btn--primary" id="modal-save">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div id="export-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Экспорт паутины</h3>
+                <button class="modal-close" id="export-modal-close">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Формат</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="export-format" value="png" checked>
+                            <span>PNG изображение</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="export-format" value="svg">
+                            <span>SVG файл</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="export-format" value="json">
+                            <span>JSON данные</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="export-legend" checked>
+                        <span>Включить легенду</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="export-stats" checked>
+                        <span>Показать статистику</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn--outline" id="export-modal-cancel">Отмена</button>
+                <button class="btn btn--primary" id="export-download">Скачать</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Panel -->
+    <div id="help-panel" class="panel">
+        <div class="panel-content">
+            <div class="panel-header">
+                <h3>Помощь</h3>
+                <button class="panel-close" id="help-close">✕</button>
+            </div>
+            <div class="panel-body">
+                <div class="help-section">
+                    <h4>Как это работает</h4>
+                    <div class="video-placeholder">
+                        <div class="video-icon">▶️</div>
+                        <p>Видео-гид по Stickyweb</p>
+                    </div>
+                    <button class="btn btn--outline btn--full-width" id="restart-tutorial">Пройти туториал заново</button>
+                </div>
+                
+                <div class="help-section">
+                    <h4>Часто задаваемые вопросы</h4>
+                    <div class="faq-list" id="faq-list">
+                        <!-- FAQ items will be dynamically added -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Panel -->
+    <div id="settings-panel" class="panel">
+        <div class="panel-content">
+            <div class="panel-header">
+                <h3>Настройки</h3>
+                <button class="panel-close" id="settings-close">✕</button>
+            </div>
+            <div class="panel-body">
+                <div class="settings-section">
+                    <h4>Тема</h4>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="theme" value="light" checked>
+                            <span>Светлая</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="theme" value="dark">
+                            <span>Темная</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h4>Опасная зона</h4>
+                    <button class="btn btn--outline" id="clear-data-btn">Очистить все данные</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
